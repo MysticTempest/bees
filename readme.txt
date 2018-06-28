@@ -38,10 +38,12 @@ FUTURE
 
 CONTRIBUTORS
 ------------
-- bas080
-- VanessaE (wild bee hive nodebox)
-- Neuromancer (textures for wild bee hive and inspiration for other textures)
+- bas080 - Code
+- MysticTempest (new nodeboxes and textures)
 - Novatux (enabled pipeworks compatibility)
+- Benboncan - bee sounds
+
+
 
 FORUM
 -----
@@ -50,4 +52,11 @@ https://forum.minetest.net/viewtopic.php?pid=102905
 LICENSE
 -------
 - codes is WTFPL
-- textures are CC BY-SA
+- textures are CC BY-SA 4
+
+-Sounds
+Bees buzzing: https://freesound.org/people/Benboncan/sounds/73370/
+	Creator: Benboncan
+	License: CC-BY-3.0
+	Filename: benconcan_bees_short.ogg
+

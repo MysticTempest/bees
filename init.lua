@@ -162,7 +162,7 @@
     tiles = {
       {
         name='bees_strip.png', 
-        animation={type='vertical_frames', aspect_w=16,aspect_h=16, length=2.0}
+        animation={type='vertical_frames', aspect_w=64,aspect_h=64, length=4.0}
       }
     },
     damage_per_second = 1,
@@ -177,25 +177,34 @@
 
   minetest.register_node('bees:hive_wild', {
     description = 'wild bee hive',
-    tiles = {'bees_hive_wild.png','bees_hive_wild.png','bees_hive_wild.png', 'bees_hive_wild.png', 'bees_hive_wild_bottom.png'}, --Neuromancer's base texture
+    tiles = {'wild_hive.png'}, 
     drawtype = 'nodebox',
     paramtype = 'light',
-    paramtype2 = 'wallmounted',
     drop = {
       max_items = 6,
       items = {
         { items = {'bees:honey_comb'}, rarity = 5}
       }
     },
-    groups = {choppy=2,oddly_breakable_by_hand=2,flammable=3,attached_node=1},
-    node_box = { --VanessaE's wild hive nodebox contribution
-      type = 'fixed',
-      fixed = {
-        {-0.250000,-0.500000,-0.250000,0.250000,0.375000,0.250000}, --NodeBox 2
-        {-0.312500,-0.375000,-0.312500,0.312500,0.250000,0.312500}, --NodeBox 4
-        {-0.375000,-0.250000,-0.375000,0.375000,0.125000,0.375000}, --NodeBox 5
-        {-0.062500,-0.500000,-0.062500,0.062500,0.500000,0.062500}, --NodeBox 6
-      }
+	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2, wood = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, -0.0625, -0.25, 0.3125, 0.5, -0.1875}, -- NodeBox1
+			{-0.3125, -0.125, -0.25, 0.3125, 0.5, -0.1875}, -- NodeBox8
+			{-0.25, -0.1875, -0.25, 0.25, 0.5, -0.1875}, -- NodeBox9
+			{-0.1875, -0.3125, -0.25, 0.1875, 0.5, -0.1875}, -- NodeBox10
+			{-0.125, -0.375, -0.25, 0.125, 0.5, -0.1875}, -- NodeBox11
+			{-0.375, -0.0625, -0.125, 0.375, 0.5, -0.0625}, -- NodeBox12
+			{-0.375, -0.1875, -0.125, 0.25, 0.5, -0.0625}, -- NodeBox13
+			{-0.25, -0.25, -0.125, 0.25, 0.5, -0.0625}, -- NodeBox14
+			{-0.1875, -0.4375, -0.125, 0.0625, 0.5, -0.0625}, -- NodeBox15
+			{-0.375, 0.0625, 0, 0.3125, 0.5, 0.0625}, -- NodeBox16
+			{-0.5, 0.1875, 0, 0.0625, 0.5, 0.0625}, -- NodeBox17
+			{-0.4375, -0.0625, 0, 0.0625, 0.5, 0.0625}, -- NodeBox18
+			{-0.3125, -0.3125, 0, -0.0625, 0.5, 0.0625}, -- NodeBox19
+			{-0.375, 0.4375, -0.25, 0.3125, 0.5, 0.0625}, -- NodeBox20
+		}
     },
     on_timer = function(pos)
       local meta = minetest.get_meta(pos)
@@ -305,22 +314,29 @@
 
   minetest.register_node('bees:hive_artificial', {
     description = 'bee hive',
-    tiles = {'default_wood.png','default_wood.png','default_wood.png', 'default_wood.png','default_wood.png','bees_hive_artificial.png'},
-    drawtype = 'nodebox',
+    	tiles = {
+		"apiary_top.png", --top
+		"apiary_top.png", --bottom
+		"apiary_side.png",  -- right
+		"apiary_side.png",  -- left
+		"apiary_side.png",  -- back
+		"apiary_front.png",  -- front
+	},
+	drawtype = 'nodebox',
     paramtype = 'light',
     paramtype2 = 'facedir',
     groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3,wood=1},
     sounds = default.node_sound_wood_defaults(),
-    node_box = {
-      type = 'fixed',
-      fixed = {
-        {-4/8, 2/8, -4/8, 4/8, 3/8, 4/8},
-        {-3/8, -4/8, -2/8, 3/8, 2/8, 3/8},
-        {-3/8, 0/8, -3/8, 3/8, 2/8, -2/8},
-        {-3/8, -4/8, -3/8, 3/8, -1/8, -2/8},
-        {-3/8, -1/8, -3/8, -1/8, 0/8, -2/8},
-        {1/8, -1/8, -3/8, 3/8, 0/8, -2/8},
-      }
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4, -0.5, -0.3, -0.3, -0.4, -0.4}, -- NodeBox3
+			{0.3, -0.5, -0.4, 0.4, -0.4, -0.3}, -- NodeBox5
+			{-0.4, -0.5, 0.3, -0.3, -0.4, 0.4}, -- NodeBox6
+			{0.3, -0.5, 0.4, 0.4, -0.4, 0.3}, -- NodeBox7
+			{-0.4, -0.4, -0.4, 0.4, 0.4, 0.4}, -- NodeBox8
+			{-0.5, 0.4, -0.5, 0.5, 0.5, 0.5}, -- NodeBox9
+		}
     },
     on_construct = function(pos)
       local timer = minetest.get_node_timer(pos)
@@ -517,7 +533,7 @@
 
   minetest.register_craftitem('bees:queen', {
     description = 'Queen Bee',
-    inventory_image = 'bees_particle_bee.png',
+    inventory_image = 'bees_particle_bee_queen.png',
     stack_max = 1,
   })
 
