@@ -13,6 +13,7 @@
     local spos = pos.x .. ',' .. pos.y .. ',' ..pos.z
     local formspec =
       'size[8,9]'..
+	  'image[-0.35,-0.35;10.6,6.0;wild_hive_bg.png]'..
       'list[nodemeta:'.. spos .. ';combs;1.5,3;5,1;]'..
       'list[current_player;main;0,5;8,4;]'
     if grafting then
@@ -25,6 +26,7 @@
     local spos = pos.x..','..pos.y..','..pos.z
     local formspec =
       'size[8,9]'..
+	  'image[-0.35,-0.35;10.6,6.0;artificial_hive_bg.png]'..
       'list[nodemeta:'..spos..';queen;3.5,1;1,1;]'..
       'list[nodemeta:'..spos..';frames;0,3;8,1;]'..
       'list[current_player;main;0,5;8,4;]'
@@ -43,8 +45,13 @@
 
 --NODES
   minetest.register_node('bees:extractor', {
-    description = 'honey extractor',
-    tiles = {"bees_extractor.png", "bees_extractor.png", "bees_extractor.png", "bees_extractor.png", "bees_extractor.png", "bees_extractor_front.png"},
+    description = 'Honey Extractor',
+    tiles = {{
+		    name = "bees_extractor_front.png",
+		    animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 3}
+			}, 
+			"bees_extractor.png", "bees_extractor.png", "bees_extractor.png", "bees_extractor.png", "bees_extractor.png"
+	},
     paramtype2 = "facedir",
     groups = {choppy=2,oddly_breakable_by_hand=2,tubedevice=1,tubedevice_receiver=1},
     on_construct = function(pos, node)
@@ -58,6 +65,7 @@
       inv:set_size('wax',1)
       meta:set_string('formspec',
         'size[8,9]'..
+	    'image[-0.35,-0.35;10.6,6.0;bees_extractor_bg.png]'..
         --input
         'list[nodemeta:'..pos..';frames_filled;2,1;1,1;]'..
         'list[nodemeta:'..pos..';bottles_empty;2,3;1,1;]'..
@@ -155,7 +163,7 @@
   })
 
   minetest.register_node('bees:bees', {
-    description = 'flying bees',
+    description = 'Flying Bees',
     drawtype = 'plantlike',
     paramtype = 'light',
     groups = { not_in_creative_inventory=1 },
@@ -176,7 +184,7 @@
   })
 
   minetest.register_node('bees:hive_wild', {
-    description = 'wild bee hive',
+    description = 'Wild Bee Hive',
     tiles = {'wild_hive.png'}, 
     drawtype = 'nodebox',
     paramtype = 'light',
@@ -313,7 +321,7 @@
   })
 
   minetest.register_node('bees:hive_artificial', {
-    description = 'bee hive',
+    description = 'Bee Hive',
     	tiles = {
 		"apiary_top.png", --top
 		"apiary_top.png", --bottom
@@ -500,32 +508,32 @@
 
 --ITEMS
   minetest.register_craftitem('bees:frame_empty', {
-    description = 'empty hive frame',
+    description = 'Empty Hive Frame',
     inventory_image = 'bees_frame_empty.png',
     stack_max = 24,
   })
 
   minetest.register_craftitem('bees:frame_full', {
-    description = 'filled hive frame',
+    description = 'Filled Hive Frame',
     inventory_image = 'bees_frame_full.png',
     stack_max = 12,
   })
 
   minetest.register_craftitem('bees:bottle_honey', {
-    description = 'honey bottle',
+    description = 'Honey Bottle',
     inventory_image = 'bees_bottle_honey.png',
     stack_max = 12,
     on_use = minetest.item_eat(3, "vessels:glass_bottle"),
   })
   
   minetest.register_craftitem('bees:wax', {
-    description = 'bees wax',
+    description = 'Bees Wax',
     inventory_image = 'bees_wax.png',
     stack_max = 48,
   })
 
   minetest.register_craftitem('bees:honey_comb', {
-    description = 'honey comb',
+    description = 'Honey Comb',
     inventory_image = 'bees_comb.png',
     on_use = minetest.item_eat(2),
     stack_max = 8,
@@ -594,7 +602,7 @@
 
 --TOOLS
   minetest.register_tool('bees:smoker', {
-    description = 'smoker',
+    description = 'Smoker',
     inventory_image = 'bees_smoker.png',
     tool_capabilities = {
       full_punch_interval = 3.0,
@@ -626,7 +634,7 @@
   })
 
   minetest.register_tool('bees:grafting_tool', {
-    description = 'grafting tool',
+    description = 'Grafting Tool',
     inventory_image = 'bees_grafting_tool.png',
     tool_capabilities = {
       full_punch_interval = 3.0,
@@ -665,7 +673,7 @@
   --PIPEWORKS
     if minetest.get_modpath("pipeworks") then
       minetest.register_node('bees:hive_industrial', {
-        description = 'industrial bee hive',
+        description = 'Industrial Bee Hive',
         tiles = { 'bees_hive_industrial.png'},
         paramtype2 = 'facedir',
         groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,tubedevice=1,tubedevice_receiver=1},

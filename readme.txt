@@ -1,8 +1,19 @@
-BEES MOD V2.2
+BEES MOD V4.0
 -------------
+
+
+
+
+
 
 FEATURES
 --------
+4.0
+- All new textures, new nodeboxes for wild and artificial hives, formspec backgrounds.
+
+
+
+
 3.0
 - Pipeworks compatibility (Industrial beehive)
 - Get honey comb from full frame
